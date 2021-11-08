@@ -1,0 +1,28 @@
+{
+  "name": "wetube",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haemiii/weetube-reloaded.git"
+  },
+  "author": "haeiiii",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/haemiii/weetube-reloaded/issues"
+  },
+  "homepage": "https://github.com/haemiii/weetube-reloaded#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "nodemon": "^2.0.14"
+  }
+}
