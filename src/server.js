@@ -2,7 +2,7 @@ import express from "express";  //node_modules에서 찾아줌!!
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
 import videoRouter from "./routers/videoRouter";
-import userRouter from "./routers/userRouter";
+import userRouter from "./routers/userRouter"; // ./ ->이 파일에서
 
 const PORT = 4000;
 
