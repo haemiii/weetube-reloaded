@@ -10,6 +10,9 @@ const app = express(); //server = application 만들기
 //server is always conneted with internet
 //type google.com -> request, server is always listening
 const logger = morgan("dev");
+
+app.set("view engine", "pug");
+app.set("views", process.cwd() + "/src/views")
 app.use(logger);
 
 //create router
