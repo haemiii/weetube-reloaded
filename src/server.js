@@ -12,8 +12,9 @@ const app = express(); //server = application 만들기
 const logger = morgan("dev");
 
 app.set("view engine", "pug");
-app.set("views", process.cwd() + "/src/views")
+app.set("views", process.cwd() + "/src/views");
 app.use(logger);
+app.use(express.urlencoded({extended: true})); // make express application understand form
 
 //create router
 app.use("/", globalRouter);
