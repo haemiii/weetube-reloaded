@@ -1,3 +1,5 @@
+import "./db";
+import "./models/Video";
 import express from "express";  //node_modules에서 찾아줌!!
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
