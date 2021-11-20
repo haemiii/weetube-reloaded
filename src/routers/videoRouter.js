@@ -3,9 +3,9 @@ import {see, getEdit, postEdit, postUpload,getUpload} from "../controllers/video
 const videoRouter = express.Router();
 
 
-videoRouter.get("/:id(\\d+)", see); // 정규식(regular expression)사용! 
-// * = everything, (nico\w+) -> w: everyword. (\d+) ->d : digit  
-videoRouter.route("/:id(\\d+)/edit").get(getEdit).post(postEdit);
 videoRouter.route("/upload").get(getUpload).post(postUpload);
+videoRouter.get("/:id([0-9a-f]{24})", see); // 정규식(regular expression)사용! 
+// * = everything, (nico\w+) -> w: everyword. (\d+) ->d : digit  
+videoRouter.route("/:id([0-9a-f]{24})/edit").get(getEdit).post(postEdit);
 
 export default videoRouter;
