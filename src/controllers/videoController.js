@@ -8,7 +8,7 @@ export const home = async(req, res)=> {
     // });
     
     //promise pattern
-    const videos = await Video.find({});
+    const videos = await Video.find({}).sort({createdAt: "desc"});
     return res.render("home", { pageTitle: "Home", videos });
     
 }
@@ -72,3 +72,23 @@ export const postUpload = async(req, res) =>{
 
     }
 };
+
+export const deleteVideo = async (req, res)=>{
+    const {id} = req.params;
+    await Video.findByIdAndDelete(id);
+    return res.redirect("/");
+};
+
+export const search = async (req, res)=>{
+    const { keyword } = req.query;
+    let videos = [];
+    console.log(keyword);
+    if (keyword){
+        const videos = await Video.find({
+            title: {
+                $regex: new RegExp(`${keyword}$` , "i"),
+            },       
+        });
+    }
+    return res.render("search", {pageTitle: "Search", videos})
+}
