@@ -1,7 +1,7 @@
 
 import express from "express";  //node_modules에서 찾아줌!!
 import morgan from "morgan";
-import globalRouter from "./routers/globalRouter";
+import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter"; // ./ ->이 파일에서
 
@@ -16,7 +16,7 @@ app.use(logger);
 app.use(express.urlencoded({extended: true})); // make express application understand form
 
 //create router
-app.use("/", globalRouter);
+app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users",userRouter);
 
