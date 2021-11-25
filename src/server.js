@@ -1,5 +1,6 @@
 
 import express from "express";  //node_modules에서 찾아줌!!
+import session from "express-session"
 import morgan from "morgan";
 import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
@@ -15,6 +16,18 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(express.urlencoded({extended: true})); // make express application understand form
 
+app.use(session({
+    secret: "Hello!",
+    resave: true,
+    saveUninitialized: true,
+    })
+);
+app.use((req, res, next) => {
+    req.sessionStore.all((error, sessions) => {
+      console.log(sessions);
+      next();
+    });
+  });
 //create router
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
