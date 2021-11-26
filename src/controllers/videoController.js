@@ -2,6 +2,10 @@ import Video from "../models/Video";
 
 
 export const home = async(req, res)=> {
+    console.log("This is request");
+    console.log(req);
+    console.log("This is response");
+    console.log(res);
     //callback pattern!!!
     // Video.find({},(error, videos)=> {
     //     return res.render("home", {pageTitle : "Home", videos : []});

@@ -5,6 +5,7 @@ import morgan from "morgan";
 import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter"; // ./ ->이 파일에서
+import { localsMiddleware } from "./middlewares";
 
 const app = express(); //server = application 만들기
 //server is always conneted with internet
@@ -22,13 +23,14 @@ app.use(session({
     saveUninitialized: true,
     })
 );
-app.use((req, res, next) => {
-    req.sessionStore.all((error, sessions) => {
-      console.log(sessions);
-      next();
-    });
-  });
+// app.use((req, res, next) => {
+//     req.sessionStore.all((error, sessions) => {
+//       console.log(sessions);
+//       next();
+//     });
+//   });
 //create router
+app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users",userRouter);
