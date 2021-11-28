@@ -9,3 +9,5 @@ const handleError = (error)=>console.log("❌ DB Error", error)
 
 db.on("error",handleError);
 db.once("open", handleOpen);
+
+// npm 중복 파일 제거 : npm dedupe
