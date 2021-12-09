@@ -1,12 +1,53 @@
-const starBtn = document.getElementById("starBtn");
-const preview = document.getElementById("preview");
-const handleStart = async () => {
-  const stream = await navigator.mediaDevices.getUserMedia({
+const startBtn = document.getElementById("startBtn");
+const video = document.getElementById("preview");
+
+let stream;
+let recorder;
+let videoFile;
+
+const handleDownload = () => {
+  const a = document.createElement("a");
+  a.href = videoFile;
+  a.download = "MyRecording.webm";
+  document.body.appendChild(a);
+  a.click();
+};
+
+const handleStop = () => {
+  startBtn.innerText = "Download Recording";
+  startBtn.removeEventListener("click", handleStop);
+  startBtn.addEventListener("click", handleDownload);
+
+  setTimeout(() => {
+    recorder.stop();
+  }, 10000);
+};
+
+const handleStart = () => {
+  startBtn.innerText = "Stop Recording";
+  startBtn.removeEventListener("click", handleStart);
+  startBtn.addEventListener("click", handleStop);
+
+  recorder = new MediaRecorder(stream);
+  recorder.ondataavailable = (e) => {
+    //When recorder stop ,this code is excuted
+    videoFile = URL.createObjectURL(e.data);
+    video.srcObject = null;
+    video.src = videoFile;
+    video.loop = true;
+    video.play();
+  };
+  recorder.start();
+};
+
+const init = async () => {
+  stream = await navigator.mediaDevices.getUserMedia({
     audio: false,
-    video: { width: 200, height: 200 },
+    video: true,
   });
   video.srcObject = stream;
   video.play();
 };
 
-starBtn.addEventListener("click", handleStart);
+init();
+startBtn.addEventListener("click", handleStart);
