@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node build/init.js",
+    "build":"npm run build:server && npm run build:assets",
+    "build:server": "babel src -d build",
+    "build:assets": "webpack --mode=production",
     "dev:server": "nodemon",
-    "dev:assets": "webpack"
+    "dev:assets": "webpack --mode=development -w"
   },
   "repository": {
     "type": "git",
@@ -18,11 +22,14 @@
   },
   "homepage": "https://github.com/haemiii/weetube-reloaded#readme",
   "dependencies": {
+    "@ffmpeg/core": "^0.8.5",
+    "@ffmpeg/ffmpeg": "^0.9.7",
     "babel-loader": "^8.2.3",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.6.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-flash": "0.0.2",
     "express-session": "^1.17.2",
     "mongoose": "^6.0.13",
     "morgan": "^1.10.0",
@@ -31,13 +38,14 @@
     "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
     "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "css-loader": "^6.5.1",
     "mini-css-extract-plugin": "^2.4.5",
-    "nodemon": "^2.0.14",
     "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.14",
     "sass": "^1.44.0",
     "sass-loader": "^12.3.0",
     "style-loader": "^3.3.1",

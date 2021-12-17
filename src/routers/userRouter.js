@@ -1,9 +1,9 @@
-import express from "express"; //node_modules에서 찾아줌!!
+import express from "express";
 import {
   getEdit,
   postEdit,
-  see,
   logout,
+  see,
   startGithubLogin,
   finishGithubLogin,
   getChangePassword,
@@ -14,6 +14,7 @@ import {
   publicOnlyMiddleware,
   avatarUpload,
 } from "../middlewares";
+
 const userRouter = express.Router();
 
 userRouter.get("/logout", protectorMiddleware, logout);
@@ -21,14 +22,16 @@ userRouter
   .route("/edit")
   .all(protectorMiddleware)
   .get(getEdit)
-  .post(avatarUpload.single("avartar"), postEdit);
+  .post(avatarUpload.single("avatar"), postEdit);
 userRouter
   .route("/change-password")
   .all(protectorMiddleware)
   .get(getChangePassword)
   .post(postChangePassword);
+
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
-userRouter.get("/:id", see); //: -> parameter
+
+userRouter.get("/:id", see);
 
 export default userRouter;
